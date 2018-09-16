@@ -34,6 +34,11 @@ dogshed uses a flat filesystem layout as its datastore, following these semantic
      /private - keys, account settings, etc.
         /settings.json - account-specific settings for this user
         /filters.json - overall filters defined by this user
+        /subscribers - directory of subscribers who want to be notified of new content from user
+            /subscriberId
+                /subscriber.json - details about subscriber relationship
+                /profile.json - cached profile information about remote user
+                /filters.json - user-defined filters to apply to notifications sent to this account
         /subscriptions - directory of subscriptions this user has subscribed to, one subdirectory per subscription
             /subscriptionId
                 /subscription.json - details about subscription
