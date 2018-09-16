@@ -30,36 +30,37 @@ dogshed uses a flat filesystem layout as its datastore, following these semantic
             /privacy.json - privacy policy
             /contact.json - contact information for server related issues
         /status.json - public facing system status information updated periodically
-/user
-     /private - keys, account settings, etc.
-        /settings.json - account-specific settings for this user
-        /filters.json - overall filters defined by this user
-        /subscribers - directory of subscribers who want to be notified of new content from user
-            /subscriberId
-                /subscriber.json - details about subscriber relationship
-                /profile.json - cached profile information about remote user
-                /filters.json - user-defined filters to apply to notifications sent to this account
-        /subscriptions - directory of subscriptions this user has subscribed to, one subdirectory per subscription
-            /subscriptionId
-                /subscription.json - details about subscription
-                /profile.json - cached profile information about remote user
-                /filters.json - user-defined filters to apply to messages received from this account
-            /subscriptionLists - directory of subdirectories representing lists for display of incoming subscription content
-                /listId
-                    /list.json - details about list (name, optional description?, optional visibility?, array of subscriptionIds)
-                    /filters.json - user-defined filters to apply to the content of this list
-     /public
-        /media - files uploaded by user
-        /posts - statuses posted by user
-            /postId - subdirectory containing post details
-                /post.json - actual ActivityPub json content
-                /settings.json - additional post-specific settings
-        /tags - subdirectory of tagged (hashtagged) content for easy reference later
-            /tagName - directory of symlinks to /posts/postId for each tagged post
-        /profile - profile json and associated media
-            /profile.json - actual ActivityPub Actor json content
-            /avatar.png - avatar image
-            /header.png - header image
+/accounts - per-account data
+    /accountId
+        /private - keys, account settings, etc.
+            /settings.json - account-specific settings for this user
+            /filters.json - overall filters defined by this user
+            /subscribers - directory of subscribers who want to be notified of new content from user
+                /subscriberId
+                    /subscriber.json - details about subscriber relationship
+                    /profile.json - cached profile information about remote user
+                    /filters.json - user-defined filters to apply to notifications sent to this account
+            /subscriptions - directory of subscriptions this user has subscribed to, one subdirectory per subscription
+                /subscriptionId
+                    /subscription.json - details about subscription
+                    /profile.json - cached profile information about remote user
+                    /filters.json - user-defined filters to apply to messages received from this account
+                /subscriptionLists - directory of subdirectories representing lists for display of incoming subscription content
+                    /listId
+                        /list.json - details about list (name, optional description?, optional visibility?, array of subscriptionIds)
+                        /filters.json - user-defined filters to apply to the content of this list
+        /public
+            /media - files uploaded by user
+            /posts - statuses posted by user
+                /postId - subdirectory containing post details
+                    /post.json - actual ActivityPub json content
+                    /settings.json - additional post-specific settings
+            /tags - subdirectory of tagged (hashtagged) content for easy reference later
+                /tagName - directory of symlinks to /posts/postId for each tagged post
+            /profile - profile json and associated media
+                /profile.json - actual ActivityPub Actor json content
+                /avatar.png - avatar image
+                /header.png - header image
 
 ```
 
