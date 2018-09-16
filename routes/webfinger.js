@@ -9,8 +9,9 @@ router.get('/', function (req, res) {
   }
   else {
     let name = resource.replace('acct:','');
-    let db = req.app.get('db');
-    db.get('select webfinger from accounts where name = $name', {$name: name}, (err, result) => {
+    //let db = req.app.get('db');
+    //db.get('select webfinger from accounts where name = $name', {$name: name}, (err, result) => {
+
       if (result === undefined) {
         return res.status(404).send(`No record found for ${name}.`);
       }

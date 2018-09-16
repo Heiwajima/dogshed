@@ -5,27 +5,27 @@ const express = require('express'),
       crypto = require('crypto');
 
 router.post('/sendMessage', function (req, res) {
-  let db = req.app.get('db');
+  //let db = req.app.get('db');
   let domain = req.app.get('domain');
   let acct = req.body.acct;
   let apikey = req.body.apikey;
   let message = req.body.message;
   // check to see if your API key matches
-  db.get('select apikey from accounts where name = $name', {$name: `${acct}@${domain}`}, (err, result) => {
+    //db.get('select apikey from accounts where name = $name', {$name: `${acct}@${domain}`}, (err, result) => {
     if (result.apikey === apikey) {
       sendCreateMessage(message, acct, domain, req, res);
     }
     else {
       res.status(403).json({msg: 'wrong api key'});
     }
-  });
+    //});
 });
 
 function signAndSend(message, name, domain, req, res, targetDomain, inbox) {
   // get the private key
-  let db = req.app.get('db');
+  //let db = req.app.get('db');
   let inboxFragment = inbox.replace('https://'+targetDomain,'');
-  db.get('select privkey from accounts where name = $name', {$name: `${name}@${domain}`}, (err, result) => {
+  //db.get('select privkey from accounts where name = $name', {$name: `${name}@${domain}`}, (err, result) => {
     if (result === undefined) {
       console.log(`No record found for ${name}.`);
     }
@@ -86,9 +86,9 @@ function createMessage(text, name, domain) {
 
 function sendCreateMessage(text, name, domain, req, res) {
   let message = createMessage(text, name, domain);
-  let db = req.app.get('db');
+  //let db = req.app.get('db');
 
-  db.get('select followers from accounts where name = $name', {$name: `${name}@${domain}`}, (err, result) => {
+  //db.get('select followers from accounts where name = $name', {$name: `${name}@${domain}`}, (err, result) => {
     let followers = JSON.parse(result.followers);
     console.log(followers);
     console.log('type',typeof followers);

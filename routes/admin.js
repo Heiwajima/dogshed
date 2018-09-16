@@ -44,23 +44,24 @@ router.post('/create', function (req, res) {
   if (account === undefined) {
     return res.status(400).json({msg: 'Bad request. Please make sure "account" is a property in the POST body.'});
   }
-  let db = req.app.get('db');
+  //let db = req.app.get('db');
   let domain = req.app.get('domain');
   // create keypair
   var pair = generateRSAKeypair();
   let actorRecord = createActor(account, domain, pair.public);
   let webfingerRecord = createWebfinger(account, domain);
   const apikey = crypto.randomBytes(16).toString('hex');
-  db.run('insert or replace into accounts(name, actor, apikey, pubkey, privkey, webfinger) values($name, $actor, $apikey, $pubkey, $privkey, $webfinger)', {
-    $name: `${account}@${domain}`,
-    $apikey: apikey,
-    $pubkey: pair.public,
-    $privkey: pair.private,
-    $actor: JSON.stringify(actorRecord),
-    $webfinger: JSON.stringify(webfingerRecord)
-  }, (err, accounts) => {
+  // TODO: write all this to the user account properly
+    //db.run('insert or replace into accounts(name, actor, apikey, pubkey, privkey, webfinger) values($name, $actor, $apikey, $pubkey, $privkey, $webfinger)', {
+    //$name: `${account}@${domain}`,
+    //$apikey: apikey,
+    //$pubkey: pair.public,
+    //$privkey: pair.private,
+    //$actor: JSON.stringify(actorRecord),
+    //$webfinger: JSON.stringify(webfingerRecord)
+    //}, (err, accounts) => {
     res.status(200).json({msg: 'ok', apikey});
-  });
+    //  });
 });
 
 module.exports = router;
