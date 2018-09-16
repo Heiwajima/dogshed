@@ -114,7 +114,7 @@ router.post('/create', function (req, res) {
    throw e;
   }
   // return success and api key
-  res.status(200).json({msg: 'ok', key: apikey});
+  res.status(200).json({msg: 'ok', apikey: apikey});
 });
 
 module.exports = router;

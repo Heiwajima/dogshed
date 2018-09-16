@@ -2,8 +2,6 @@ const config = require('./.env');
 const { USER, PASS, DOMAIN, PORT } = config;
 const express = require('express');
 const app = express();
-//const sqlite3 = require('sqlite3').verbose();
-//const db = new sqlite3.Database('bot-node.db');
 const fs = require('fs');
 const routes = require('./routes'),
       bodyParser = require('body-parser'),
@@ -11,32 +9,8 @@ const routes = require('./routes'),
       http = require('http'),
       basicAuth = require('express-basic-auth');
 
-/*
-let sslOptions;
-
-try {
-  sslOptions = {
-    key: fs.readFileSync(PRIVKEY_PATH),
-    cert: fs.readFileSync(CERT_PATH)
-  };
-} catch(err) {
-  if (err.errno === -2) {
-    console.log('No SSL key and/or cert found, not enabling https server');
-  }
-  else {
-    console.log(err);
-  }
-}
-*/
-
-// if there is no `accounts` table in the DB, create an empty table
-/*db.run('CREATE TABLE IF NOT EXISTS accounts (name TEXT PRIMARY KEY, privkey TEXT, pubkey TEXT, webfinger TEXT, actor TEXT, apikey TEXT, followers TEXT, messages TEXT)');
-
-app.set('db', db);
-*/
 app.set('domain', DOMAIN);
 app.set('port', process.env.PORT || PORT || 3000);
-//app.set('port-https', process.env.PORT_HTTPS || 8443);
 app.use(bodyParser.json({type: 'application/activity+json'})); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
