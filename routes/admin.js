@@ -91,7 +91,7 @@ router.post('/create', function (req, res) {
   let actorRecord = createActor(account, domain, pair.public);
   const actorPath = path.join(accountDirectory, 'public', 'profile', 'profile.json');
   try {
-    fs.writeFileSync(actorPath, actorRecord, {encoding: 'utf8', mode: 0o664});
+    fs.writeFileSync(actorPath, JSON.stringify(actorRecord), {encoding: 'utf8', mode: 0o664});
   } catch (Exception e) {
     throw e;
   }
@@ -100,7 +100,7 @@ router.post('/create', function (req, res) {
   let webfingerRecord = createWebfinger(account, domain);
   const webfingerPath = path.join(accountDirectory, 'public', 'webfinger.json');
   try {
-    fs.writeFileSync(webfingerPath, webfingerRecord, {encoding: 'utf8', mode: 0o664});
+    fs.writeFileSync(webfingerPath, JSON.stringify(webfingerRecord), {encoding: 'utf8', mode: 0o664});
   } catch (Exception e) {
     throw e;
   }
