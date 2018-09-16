@@ -67,7 +67,7 @@ app.options('/api', cors());
 app.use('/api', cors(), routes.api);
 app.use('/api/admin', cors({ credentials: true, origin: true }), basicUserAuth, routes.admin);
 app.use('/admin', express.static('public/admin'));
-app.use('/.well-known/webfinger', cors(), routes.webfinger);
+app.use('/.well-known/webfinger', express.static('public/.well-known/webfinger'));
 app.use('/u', cors(), routes.user);
 app.use('/api/inbox', cors(), routes.inbox);
 
