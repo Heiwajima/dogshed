@@ -11,6 +11,53 @@ _This is meant as a reference implementation!_ This code implements a very small
 
 My initial use case: rework to depend primarily on flat json files in the filesystem for data storage, add enough functionality to mimic a barebones implementation of Mastodon's backend done as minimalistically as possible, targeting single-user instances running on low-power systems. My primary development systems will be a Raspberry Pi 3 with a 120 Gb SATA drive and a Raspberry Pi Zero W with a 16 Gb USB flash drive, but this should run on any ARM 7 or x86-64 platform that supports Node.js.
 
+## Layout
+
+dogshed uses a flat filesystem layout as its datastore, following these semantics:
+
+```
+/system - server-wide data
+    /private - keys, server settings, etc.
+        /settings.json - defaults, user account creation rules, etc.
+        /filters.json - server-wide filters applied to all incoming posts
+        /status.json - system status information updated periodically
+    /public - public facing server information
+        /about - directory representing the server's public-facing profile
+            /profile.json - actual ActivityPub Actor json content
+            /avatar.png - avatar image for server profile
+            /header.png - header image for server profile
+            /terms.json - terms and conditions
+            /privacy.json - privacy policy
+            /contact.json - contact information for server related issues
+        /status.json - public facing system status information updated periodically
+/user
+     /private - keys, account settings, etc.
+        /settings.json - account-specific settings for this user
+        /filters.json - overall filters defined by this user
+        /subscriptions - directory of subscriptions this user has subscribed to, one subdirectory per subscription
+            /subscriptionId
+                /subscription.json - details about subscription
+                /profile.json - cached profile information about remote user
+                /filters.json - user-defined filters to apply to messages received from this account
+            /subscriptionLists - directory of subdirectories representing lists for display of incoming subscription content
+                /listId
+                    /list.json - details about list (name, optional description?, optional visibility?, array of subscriptionIds)
+                    /filters.json - user-defined filters to apply to the content of this list
+     /public
+        /media - files uploaded by user
+        /posts - statuses posted by user
+            /postId - subdirectory containing post details
+                /post.json - actual ActivityPub json content
+                /settings.json - additional post-specific settings
+        /tags - subdirectory of tagged (hashtagged) content for easy reference later
+            /tagName - directory of symlinks to /posts/postId for each tagged post
+        /profile - profile json and associated media
+            /profile.json - actual ActivityPub Actor json content
+            /avatar.png - avatar image
+            /header.png - header image
+
+```
+
 ## Requirements
 
 This requires Node.js v10.10.0 or above.

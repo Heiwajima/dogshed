@@ -4,10 +4,13 @@ const express = require('express'),
       request = require('request'),
       router = express.Router();
 
-function signAndSend(message, name, domain, req, res, targetDomain) { 
-  // get the private key
+function signAndSend(message, name, domain, req, res, targetDomain) {
+    // get the private key from the proper subdirectory on the filesystem
+  /*
   let db = req.app.get('db');
   db.get('select privkey from accounts where name = $name', {$name: `${name}@${domain}`}, (err, result) => {
+  */
+    let result = undefined; // remove once above code replaced
     if (result === undefined) {
       return res.status(404).send(`No record found for ${name}.`);
     }
@@ -74,9 +77,10 @@ router.post('/', function (req, res) {
     let name = req.body.object.replace(`https://${domain}/u/`,'');
     sendAcceptMessage(req.body, name, domain, req, res, targetDomain);
     // Add the user to the DB of accounts that follow the account
-    let db = req.app.get('db');
+    //let db = req.app.get('db');
     // get the followers JSON for the user
-    db.get('select followers from accounts where name = $name', {$name: `${name}@${domain}`}, (err, result) => {
+    //db.get('select followers from accounts where name = $name', {$name: `${name}@${domain}`}, (err, result) => {
+      let result = undefined; //FIXME
       if (result === undefined) {
         console.log(`No record found for ${name}.`);
       }
@@ -93,9 +97,9 @@ router.post('/', function (req, res) {
         }
         let followersText = JSON.stringify(followers);
         // update into DB
-        db.run('update accounts set followers=$followers where name = $name', {$name: `${name}@${domain}`, $followers: followersText}, (err, result) => {
+          //db.run('update accounts set followers=$followers where name = $name', {$name: `${name}@${domain}`, $followers: followersText}, (err, result) => {
           console.log('updated followers!', err, result);
-        });
+          //});
       }
     });
   }
