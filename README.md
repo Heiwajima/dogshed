@@ -1,4 +1,5 @@
-# Express ActivityPub Server
+# dogshed
+## forked from Darius' [express-activitypub](https://github.com/dariusk/express-activitypub) project
 
 A very simple standalone ActivityPub server that supports:
 
@@ -8,7 +9,7 @@ A very simple standalone ActivityPub server that supports:
 
 _This is meant as a reference implementation!_ This code implements a very small subset of ActivityPub and is supposed to help you get your bearings when it comes to making your own barebones ActivityPub support in your own projects. (Of course you can still fork this and start building on it as well, but it's not exactly hardened production code.)
 
-Example use case: I own tinysubversions.com. I can have this server run on bots.tinysubversions.com. All of my bots are stored and published and discoverable there. If I want to create a new bot, I go to bots.tinysubversions.com/admin and enter an account name, enter my admin user/pass on prompt, and it creates an account record and it gives me back an API key. I then make POST calls to the API passing the API key in a header and it publishes those things to followers.
+My initial use case: rework to depend primarily on flat json files in the filesystem for data storage, add enough functionality to mimic a barebones implementation of Mastodon's backend done as minimalistically as possible, targeting single-user instances running on low-power systems. My primary development systems will be a Raspberry Pi 3 with a 120 Gb SATA drive and a Raspberry Pi Zero W with a 16 Gb USB flash drive, but this should run on any ARM 7 or x86-64 platform that supports Node.js.
 
 ## Requirements
 
@@ -18,9 +19,11 @@ This requires Node.js v10.10.0 or above.
 
 Clone the repository, then `cd` into its root directory. Install dependencies:
 
-`npm i`
+`npm install`
 
 Update your `config.json` file:
+
+**TODO**: move to .env, add some more structure for configuration, write setup script to populate .env if none exists on first run
 
 ```js
 {
@@ -37,6 +40,8 @@ Run the server!
 
 `node index.js`
 
+**TODO**: add creation of first admin account during setup script, detect if .env exists but first user has not been created and prompt for creation at start
+
 Go to the admin page and create an account:
 
 `http://yourdomain.com/admin`
@@ -45,6 +50,8 @@ Enter "test" in the "Create Account" section and hit the "Create Account" button
 
 ## Local testing
 
+**TODO**: explain nginx and apache configs here, add to setup script, offer to write nginx and apache configs during setup script
+
 You can use a service like [ngrok](https://ngrok.com/) to test things out before you deploy on a real server. All you need to do is install ngrok and run `ngrok http 3000` (or whatever port you're using if you changed it). Then go to your `config.json` and update the `DOMAIN` field to whatever `abcdef.ngrok.io` domain that ngrok gives you and restart your server.
 
 ## Admin Page
@@ -52,6 +59,8 @@ You can use a service like [ngrok](https://ngrok.com/) to test things out before
 For your convenience, if you go to the `/admin` endpoint in a browser, you will see an admin page. Don't worry, nothing is possible here unless either your admin user/pass (for creating accounts) or a valid API key (for sending messages as an account). This page provides a simple web form for both creating accounts and sending messages to followers.
 
 ## API
+
+**TODO**: flesh this out - target mastodon/pleroma API compatibility from client side for initial pass, same for ActivityPub coverage
 
 ### Create Account
 
@@ -77,6 +86,8 @@ Send a POST to `api/sendMessage` with the form fields `acct`, `apikey`, and `mes
 
 ## Database
 
+**TODO**: explain directory structure of flat json files for various pertinent Actors and Objects.
+
 This server uses a SQLite database to keep track of all the data. There is one table in the database: `accounts`.
 
 ### `accounts`
@@ -94,5 +105,5 @@ This table keeps track of all the data needed for the accounts. Columns:
 
 ## License
 
-Copyright (c) 2018 Darius Kazemi. Licensed under the MIT license.
+Copyright (c) 2018 DJ Sundog. Licensed under the MIT license.
 
