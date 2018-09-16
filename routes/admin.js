@@ -66,7 +66,7 @@ router.post('/create', function (req, res) {
         fs.mkdirSync(path.join(accountDirectory, 'public', 'posts'), 0o775);
         fs.mkdirSync(path.join(accountDirectory, 'public', 'tags'), 0o775);
         fs.mkdirSync(path.join(accountDirectory, 'public', 'profile'), 0o775);
-    } catch (Exception e) {
+    } catch (e) {
         throw e;
     }
 
@@ -76,14 +76,14 @@ router.post('/create', function (req, res) {
   const pubKeyPath = path.join(accountDirectory, 'id_rsa.pub');
   try {
     fs.writeFileSync(pubKeyPath, pair.public, {encoding: 'utf8', mode: 0o664});
-  } catch (Exception e) {
+  } catch (e) {
     throw e;
   }
   // write private key
   const privKeyPath = path.join(accountDirectory, 'private', 'id_rsa.privkey');
   try {
     fs.writeFileSync(privKeyPath, pair.private, {encoding: 'utf8', mode: 0o660});
-  } catch (Exception e) {
+  } catch (e) {
     throw e;
   }
 
@@ -92,7 +92,7 @@ router.post('/create', function (req, res) {
   const actorPath = path.join(accountDirectory, 'public', 'profile', 'profile.json');
   try {
     fs.writeFileSync(actorPath, JSON.stringify(actorRecord), {encoding: 'utf8', mode: 0o664});
-  } catch (Exception e) {
+  } catch (e) {
     throw e;
   }
 
@@ -101,7 +101,7 @@ router.post('/create', function (req, res) {
   const webfingerPath = path.join(accountDirectory, 'public', 'webfinger.json');
   try {
     fs.writeFileSync(webfingerPath, JSON.stringify(webfingerRecord), {encoding: 'utf8', mode: 0o664});
-  } catch (Exception e) {
+  } catch (e) {
     throw e;
   }
 
@@ -110,7 +110,7 @@ router.post('/create', function (req, res) {
   const apikeyPath = path.join(accountDirectory, 'private', '.apikey');
   try {
     fs.writeFileSync(apikeyPath, apikey, {encoding: 'utf8', mode: 0o660});
-  } catch (Exception e) {
+  } catch (e) {
    throw e;
   }
   // return success and api key

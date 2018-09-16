@@ -44,7 +44,6 @@ function signAndSend(message, name, domain, req, res, targetDomain) {
       });
       return res.status(200);
     }
-  });
 }
 
 function sendAcceptMessage(thebody, name, domain, req, res, targetDomain) {
@@ -101,7 +100,6 @@ router.post('/', function (req, res) {
           console.log('updated followers!', err, result);
           //});
       }
-    });
   }
 });
 

@@ -59,7 +59,6 @@ function signAndSend(message, name, domain, req, res, targetDomain, inbox) {
         }
       });
     }
-  });
 }
 
 function createMessage(text, name, domain) {
@@ -105,7 +104,6 @@ function sendCreateMessage(text, name, domain, req, res) {
       }
       res.status(200).json({msg: 'ok'});
     }
-  });
 }
 
 module.exports = router;

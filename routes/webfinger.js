@@ -19,7 +19,7 @@ router.get('/', function (req, res) {
         try {
             let webfingerData = JSON.parse(fs.readFileSync(path.join(accountPath, 'public', 'webfinger.json')));
             res.json(webfingerData);
-        } catch (Exception e) {
+        } catch (e) {
             throw e;
         }
     }
