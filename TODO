@@ -1,0 +1,86 @@
+My personal unorganized running list of things to do:
+
+- give accounts separate inbox endpoints
+- create a sharedInbox from the current inbox implementation
+
+- add support for approving Follow requests
+- add support for denying Follow requests
+
+- add incoming Subscription Lists
+- add outgoing Subscriber Lists
+
+- add filters.json support across the board as per readme
+
+- add outgoing Boost activity support
+- add outgoing Undo activity support
+- add outgoing privacy support
+- add outgoing topic/CW support
+- add outgoing Create Status activity support
+- add outgoing Delete Status activity support
+- add outgoing Favorite Status activity support
+- add outgoing Follow activity support
+- add outgoing Create Article activity support
+
+- add incoming Unfollow activity support
+- add incoming Status support
+- add incoming Reply support
+- add incoming Favorite support
+- add incoming Boost support
+- add incoming Mention support
+- add incoming Article support
+
+- add generation of html from json for requests to thing.html endpoints
+- add support for requests to thing.json endpoints
+- add support for content negotiation header parsing at thing endpoints
+
+- add passport for external account authentication support (oauth, flat file, whatever)
+
+- start mapping masto/pleroma api into /api
+
+- add new project for basic web frontend using mastopleroma api
+
+- add hashtag support
+
+- add media upload/embed support
+    - image
+    - audio
+    - video
+
+- add mute account support
+- add block account support
+- add mute domain support
+- add block domain support
+
+- add custom emoji support
+
+- release 0.5.0 to public repo
+
+- refactor obvious repetition
+
+- flesh out comments and documentation resources
+
+- write server test suite
+
+- test server against ActivityPub spec compliance tests
+
+- put together automated testing bot accounts
+
+- document full test plan
+
+- add git hooks
+
+- test test test test test
+
+- release 0.8.0 to public repo
+
+- add server Actor account handling
+- add hooks for server actor post handling
+
+- polish basic web client project
+
+- add websocket streaming support
+
+- add notification support
+
+- release 1.0.0 to public repo, retire to island nation in south pacific
+
