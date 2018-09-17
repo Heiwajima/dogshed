@@ -103,6 +103,8 @@ Run the server!
 
 **TODO**: add creation of first admin account during setup script, detect if .env exists but first user has not been created and prompt for creation at start
 
+**TODO**: add info about nginx reverse proxy setup
+
 Go to the admin page and create an account:
 
 `http://yourdomain.com/admin`
@@ -144,25 +146,6 @@ Send a POST to `api/sendMessage` with the form fields `acct`, `apikey`, and `mes
 * `acct`: the account name in the form "myAccountName" (no domain or @'s needed)
 * `apikey`: your hex API key
 * `message`: the message you want to send -- for Mastodon-compatible posts this might be plain text or simple HTML, but ActivityPub is a lot more flexible than just Mastodon! In theory, according to the [ActivityPub spec](https://www.w3.org/TR/activitypub/#create-activity-outbox) it can be any [ActivityStreams object](https://www.w3.org/TR/activitystreams-core/#object)
-
-## Database
-
-**TODO**: explain directory structure of flat json files for various pertinent Actors and Objects.
-
-This server uses a SQLite database to keep track of all the data. There is one table in the database: `accounts`.
-
-### `accounts`
-
-This table keeps track of all the data needed for the accounts. Columns:
-
-* `name` `TEXT PRIMARY KEY`: the account name, in the form `thename@example.com`
-* `privkey` `TEXT`: the RSA private key for the account
-* `pubkey` `TEXT`: the RSA public key for the account
-* `webfinger` `TEXT`: the entire contents of the webfinger JSON served for this account
-* `actor` `TEXT`: the entire contents of the actor JSON served for this account
-* `apikey` `TEXT`: the API key associated with this account
-* `followers` `TEXT`: a JSON-formatted array of the URL for the Actor JSON of all followers, in the form `["https://remote.server/users/somePerson", "https://another.remote.server/ourUsers/anotherPerson"]`
-* `messages` `TEXT`: not yet used but will eventually store all messages so we can render them on a "profile" page
 
 ## License
 
