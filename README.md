@@ -11,6 +11,14 @@ _This is meant as a reference implementation!_ This code implements a very small
 
 My initial use case: rework to depend primarily on flat json files in the filesystem for data storage, add enough functionality to mimic a barebones implementation of Mastodon's backend done as minimalistically as possible, targeting single-user instances running on low-power systems. My primary development systems will be a Raspberry Pi 3 with a 120 Gb SATA drive and a Raspberry Pi Zero W with a 16 Gb USB flash drive, but this should run on any ARM 7 or x86-64 platform that supports Node.js.
 
+## Current Status
+
+* creation of new Actors via API is working
+* discovery of Actors via webfinger is working
+* subscribing to Actors from remote accounts is working
+
+Literally nothing else is working yet. Check back.
+
 ## Layout
 
 dogshed uses a flat filesystem layout as its datastore, following these semantics:
