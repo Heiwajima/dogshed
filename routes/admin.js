@@ -59,6 +59,7 @@ router.post('/create', function (req, res) {
         fs.mkdirSync(accountDirectory, 0o775); // make dir, owner group rw world r
         fs.mkdirSync(path.join(accountDirectory, 'private'), 0o770);
         fs.mkdirSync(path.join(accountDirectory, 'private', 'subscribers'), 0o770);
+        fs.writeFileSync(path.join(accountDirectory, 'private','subscribers','subscribers.json'), "{subscribers:[]}", {encoding: 'utf8', mode: 0o660});
         fs.mkdirSync(path.join(accountDirectory, 'private', 'subscriptions'), 0o770);
         fs.mkdirSync(path.join(accountDirectory, 'private', 'subscriptions', 'subscriptionLists'), 0o770);
         fs.mkdirSync(path.join(accountDirectory, 'public'), 0o775);

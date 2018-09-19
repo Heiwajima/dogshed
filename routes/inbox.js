@@ -94,14 +94,18 @@ router.post('/', function (req, res) {
     // check subscribers for account
     try {
         let subscribersPath = path.join(accountPath, 'private', 'subscribers');
+        let subscribers = JSON.parse(fs.readFileSync(path.join(subscribersPath, 'subscribers.json')));
         let newSubscriberPath = path.join(subscribersPath, encodeURIComponent(req.body.actor));
-        if (fs.existsSync(newSubscriberPath)) {
+        if (fs.existsSync(newSubscriberPath) && subscribers.filter(subscriber => (subscriber.id === req.body.actor)).length > 0) {
             // already following, just say okay
             return res.status(200);
         }
         // still here? new subscriber - set them up
         fs.mkdirSync(newSubscriberPath, 0o770);
         let subscriberProfilePath = path.join(newSubscriberPath, 'profile.json');
+
+        // add to subscribers and write out json
+        let newSubscriber = {}
 
         // get the new subscriber's profile and cache it locally
         request({
@@ -110,6 +114,16 @@ router.post('/', function (req, res) {
             method: "GET"
         }, (err, resp) => {
             fs.writeFileSync(subscriberProfilePath, resp.body, {encoding: 'utf8', mode: 0o660});
+            let newSubscriber = JSON.parse(resp.body);
+            let newSubscriberEntry = {
+                id: newSubscriber.id,
+                inbox: newSubscriber.inbox
+            };
+            if (subscribers.indexOf(newSubscriber) === -1) {
+                subscribers.push(newSubscriber);
+                fs.writeFileSync(path.join(subscribersPath, 'subscribers.json'), JSON.stringify(subscribers), {encoding: 'utf8'});
+                console.log("    subscribers.json updated for " + accountName);
+            }
         });
     } catch (e) {
       throw(e);
