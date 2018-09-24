@@ -74,7 +74,16 @@ dogshed uses a flat filesystem layout as its datastore, following these semantic
 
 ## Requirements
 
-This requires Node.js v10.10.0 or above.
+This requires Node.js v10.10.0 or above and Build-Essential
+
+````
+Installation of Node.js V10.10.0 or greater and Build-Essential for Ubuntu 18.04
+     curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+     sudo apt-get install nodejs
+     sudo apt-get install build-essential
+````
+
+
 
 ## Installation
 
