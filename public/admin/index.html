@@ -34,10 +34,13 @@
 <h2>Create Account</h2>
 <p>Create a new ActivityPub Actor (account). Requires the admin user/pass on submit.</p>
 <p>
+<!-- Begin Account Creation Form -->
 <input id="account" type="text" placeholder="myAccountName"/>
 </p>
 <button onclick="createAccount()">Create Account</button>
 <p id="createOutput"></p>
+<!-- End Account Creation Form -->
+<!-- Begin Send Message -->
 <h2>Send Message To Followers</h2>
 <p>Enter an account name, its API key, and a message. This message will send to all its followers.</p>
 <p>
@@ -51,7 +54,7 @@
 </p>
 <button onclick="sendMessage()">Send Message</button>
 <p id="sendOutput"></p>
-  
+<!-- End Send Message -->
 <script>
 function queryStringFromObject(obj) {
   return Object.keys(obj).map(key => key + '=' + obj[key]).join('&');
@@ -62,7 +65,7 @@ function sendMessage() {
   let apikey = document.querySelector('#apikey').value;
   let message = document.querySelector('#message').value;
 
-  postData('/api/sendMessage', {acct, apikey, message})
+  postData('/api/sendMessage', {acct, apikey, message}) // Activates route in routes/api.js
     .then(data => {
       console.log(data);
       if (data.msg && data.msg === 'ok') {
